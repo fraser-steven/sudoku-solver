@@ -24,3 +24,11 @@ def print_board(bo):
             else:
                 print(str(bo[i][j]) + "", end="")
 
+
+def find_empty(bo):
+    for i in range(len(bo)):
+        for j in range((len(b0))):
+            if bo[i][j] == 0:
+                return (i,j)
+    return None
+
