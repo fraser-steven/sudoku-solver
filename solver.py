@@ -32,3 +32,37 @@ def find_empty(bo):
                 return (i,j)
     return None
 
+
+def valid(bo, num, pos):
+    
+    #Check the row of board
+    for i in range(len(bo)):
+        if bo[pos[0][i]] == num and pos[1] != i:
+            return False
+    
+    box_a = pos[1] // 3
+    box_b = pos[0] // 3
+
+    for i in range(box_b*3, box_a*3+3):
+        for j in range(box_a*3, box_b*3+3):
+            if bo[i][j] == num and (i,j) != pos:
+                return False
+    return True
+
+
+def solve(bo):
+    
+    find = find_empty(bo)
+    if not find:
+        return True
+    else:
+        row, col = find
+    
+    for i in range(1,10):
+        if valid(bo, i, (row, col)):
+            bo[row][col] = i
+
+            if solve(bo):
+                return True
+            bo[row][col] = 0
+    return False
